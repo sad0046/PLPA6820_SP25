@@ -153,3 +153,49 @@ df # Output to see in the console
 
 colnames(df) <- c("Value", "Name")
 df
+df[1] # Output X Row
+df[1,2] # Output X Row and Y Column = 1 Value
+df$value # Access Columns. R auto populates.
+df$value[1] # Output Column and X Row = 1 Value
+
+## Subsetting or indexing
+
+# Example: Element of the column value such that names is equal to Jie
+
+df$value[df$name == "Jie"]
+df$value[df$name %in% c("Jie","Tom")] # Output column value for multiple
+df$value[!df$name %in% c("Jie","Tom")] # Output column value such that names are not equal to multiple
+
+# Subset Function
+
+subset(df, name == "Jie")
+
+# Making New Column in Dataframe
+
+df$log_value <- log(df$value)
+
+#### Exercise 7: Installing Packages ####
+## Packages are a bunch of functions that do stuff.
+# Open source
+
+install.packages("tidyverse")  # use quotes around the package name
+
+# Alternatively can select Packages using the Packages Tab and the CRAN Repository
+# Can also download Tarballs from the internet and load them in using the Packages Tab
+# Bioconductor also has R Packages and a specieal script for loading them.
+
+## To load the package use library()
+
+library(tidyverse)
+
+#### Exercise 8: Loading Data ####
+## CSV Files or TXT Files
+# Use read.csv() and full file path
+
+file <- read.csv("Full File Path", header = TRUE/FALSE, sep = ",", na.strings = "na")
+
+# Use file.choose() to open up a browswer to search files and get file path.
+
+file2 <- file.choose()
+
+# Check working directory using getwd()
