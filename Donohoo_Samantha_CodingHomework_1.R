@@ -199,3 +199,7 @@ file <- read.csv("Full File Path", header = TRUE/FALSE, sep = ",", na.strings = 
 file2 <- file.choose()
 
 # Check working directory using getwd()
+
+help("read.csv")
+
+
