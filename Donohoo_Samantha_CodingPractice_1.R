@@ -1,6 +1,6 @@
 ### Sam Donohoo
 ### Date: 2/6/2025
-#### Coding Practice #1 ####
+#### Coding Challenge #1 ####
 
 # Create a vector named 'z' with the values 1 to 200
 
