@@ -141,6 +141,21 @@ myco.don.Q3.2
 # Use ggarrange function to combine all three figures into one with three columns and one row
 # Set the labels for the subplots as A, B and C
 
+# Rerun Question 1 so that the order is the same between all three plots
+
+myco.don.Q1 <- ggplot(myco, aes(x = Treatment, y = DON, color = Cultivar, fill = Cultivar)) +
+  geom_boxplot(outlier.shape = NA, color = "black") +
+  geom_point(aes(fill=Cultivar), pch=21, color = "black", 
+             position=position_jitterdodge(dodge.width=0.85), alpha = 0.6) + 
+  scale_color_manual(values = cbbPalette) +
+  scale_fill_manual(values = cbbPalette) + 
+  ylab("DON (ppm)") +
+  xlab("") +
+  theme_classic() +
+  facet_wrap(~Cultivar)
+
+myco.don.Q1
+
 # Arrange multiple ggplot objects into a single figure
 myco.don.FinalFigure <- ggarrange(
   myco.don.Q1,  # First plot: Q1
