@@ -142,6 +142,7 @@ myco.don.Q3.2
 # Set the labels for the subplots as A, B and C
 
 # Rerun Question 1 so that the order is the same between all three plots
+# NOT REQUIRED BUT IT WAS STRESSING ME OUT
 
 myco.don.Q1 <- ggplot(myco, aes(x = Treatment, y = DON, color = Cultivar, fill = Cultivar)) +
   geom_boxplot(outlier.shape = NA, color = "black") +
