@@ -141,3 +141,7 @@ myco.don.Ttest
 ```
 
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+# Question 6
+
+Sam Donohoo GitHub Link: <https://github.com/sad0046/PLPA6820_SP25.git>

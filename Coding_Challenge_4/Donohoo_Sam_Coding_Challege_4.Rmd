@@ -5,10 +5,10 @@ date: "2025-01-27"
 output:
   md_document:
     variant: gfm
-  html_document:
-    toc_float: true
   word_document:
     toc: true
+  html_document:
+    toc_float: true
   pdf_document:
     toc: true
 ---
@@ -130,3 +130,6 @@ myco.don.Ttest <- ggarrange(
 myco.don.Ttest
 ```
 
+# Question 6
+
+Sam Donohoo GitHub Link: https://github.com/sad0046/PLPA6820_SP25.git
