@@ -3,6 +3,6 @@
 #### Links to Coding Challenges
 These are links to the Coding Challenges viewable on GitHub (.md).
 
-- [Coding Challenge 4](Coding_Challenge_4/Donohoo_Sam_Coding_Challenge_4.md)
+- [Coding Challenge 4](PLPA6820_SP25/blob/main/Coding_Challenge_4/Donohoo_Sam_Coding_Challege_4.md)
 
 #### File Tree
