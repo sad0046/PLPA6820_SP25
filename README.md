@@ -31,14 +31,7 @@ These are links to the Coding Challenges viewable on GitHub (.md).
 │   │       ├── Question 2 Individual Figures-3.png
 │   │       ├── Question 2 Ttest-1.png
 │   │       ├── Question 2 Ttest-2.png
-│   │       ├── Question 2 Ttest-3.png
-│   │       ├── Question 2-1.png
-│   │       ├── Question 2-2.png
-│   │       ├── Question 2-3.png
-│   │       ├── unnamed-chunk-2-1.png
-│   │       ├── unnamed-chunk-2-2.png
-│   │       ├── unnamed-chunk-2-3.png
-│   │       └── unnamed-chunk-3-1.png
+│   │       └── Question 2 Ttest-3.png
 │   └── MycotoxinData.csv
 ├── Coding_Homework
 │   ├── Donohoo_Samantha_CodingHomework_1.R
