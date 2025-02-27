@@ -25,6 +25,13 @@ These are links to the Coding Challenges viewable on GitHub (.md).
 │   ├── Donohoo_Sam_Coding_Challege_4.Rmd
 │   ├── Donohoo_Sam_Coding_Challege_4_files
 │   │   └── figure-gfm
+│   │       ├── Question 2 Combined Figure-1.png
+│   │       ├── Question 2 Individual Figures-1.png
+│   │       ├── Question 2 Individual Figures-2.png
+│   │       ├── Question 2 Individual Figures-3.png
+│   │       ├── Question 2 Ttest-1.png
+│   │       ├── Question 2 Ttest-2.png
+│   │       ├── Question 2 Ttest-3.png
 │   │       ├── Question 2-1.png
 │   │       ├── Question 2-2.png
 │   │       ├── Question 2-3.png
