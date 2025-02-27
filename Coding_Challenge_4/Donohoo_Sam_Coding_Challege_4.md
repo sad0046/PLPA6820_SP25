@@ -53,7 +53,7 @@ myco.don.Q1 <- ggplot(myco, aes(x = Treatment, y = DON, color = Cultivar, fill =
 myco.don.Q1
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-1.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Individual%20Figures-1.png)<!-- -->
 
 ``` r
 ### Graph the effects of X15ADON by Treatment
@@ -71,7 +71,7 @@ myco.don.Q3.1 <- ggplot(myco, aes(x = Treatment, y = X15ADON, color = Cultivar, 
 myco.don.Q3.1
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-2.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Individual%20Figures-2.png)<!-- -->
 
 ``` r
 ### Graph the effects of MassperSeed_mg by Treatment
@@ -89,7 +89,7 @@ myco.don.Q3.2 <- ggplot(myco, aes(x = Treatment, y = MassperSeed_mg, color = Cul
 myco.don.Q3.2
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-3.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Individual%20Figures-3.png)<!-- -->
 
 ### T-Tests
 
@@ -101,7 +101,7 @@ myco.don.Q1.Ttest <- myco.don.Q1 +
 myco.don.Q1.Ttest
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Ttest-1.png)<!-- -->
 
 ``` r
 # Question 3 - 15ADON + Ttest
@@ -111,7 +111,7 @@ myco.don.Q3.1.Ttest <- myco.don.Q3.1 +
 myco.don.Q3.1.Ttest
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Ttest-2.png)<!-- -->
 
 ``` r
 # Question 3 - MassperSeed_mg + Ttest
@@ -122,7 +122,7 @@ myco.don.Q3.2.Ttest <- myco.don.Q3.2 +
 myco.don.Q3.2.Ttest
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Ttest-3.png)<!-- -->
 
 ### Combined Figure
 
@@ -140,7 +140,7 @@ myco.don.Ttest <- ggarrange(
 myco.don.Ttest
 ```
 
-![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202%20Combined%20Figure-1.png)<!-- -->
 
 # Question 6
 

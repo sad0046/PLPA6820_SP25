@@ -3,12 +3,12 @@ title: "Coding Challege 4"
 author: "Sam Donohoo"
 date: "2025-01-27"
 output:
+  html_document:
+    toc_float: true
   md_document:
     variant: gfm
   word_document:
     toc: true
-  html_document:
-    toc_float: true
   pdf_document:
     toc: true
 ---
@@ -35,7 +35,7 @@ library(markdown)
 Data from Noel, Z.A., Roze, L.V., Breunig, M., Trail, F. 2022. Endophytic fungi as promising biocontrol agent to protect wheat from Fusarium graminearum head blight. Plant Disease. https://doi.org/10.1094/PDIS-06-21-1253-RE
 
 ### Individual Graphs
-```{r Question 2, echo=TRUE}
+```{r Question 2 Individual Figures, echo=TRUE}
 # Load in Libraries
 library(tidyverse)
 library(ggpubr)
@@ -94,7 +94,7 @@ myco.don.Q3.2
 ```
 
 ### T-Tests
-```{r}
+```{r Question 2 Ttest, echo=TRUE}
 # Question 1 + Ttest
 myco.don.Q1.Ttest <- myco.don.Q1 + 
   geom_pwc(aes(group = Treatment), method = "t_test", label = "{p.adj.signif}")
@@ -116,7 +116,7 @@ myco.don.Q3.2.Ttest
 ```
 
 ### Combined Figure
-```{r}
+```{r Question 2 Combined Figure, echo=TRUE}
 myco.don.Ttest <- ggarrange(
   myco.don.Q1.Ttest,  # First plot: Q1 Ttest
   myco.don.Q3.1.Ttest,  # Second plot: Q3.1 Ttest
