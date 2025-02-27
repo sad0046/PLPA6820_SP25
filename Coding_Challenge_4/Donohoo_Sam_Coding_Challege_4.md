@@ -1,15 +1,8 @@
 ``` r
 library(knitr)
-```
-
-    ## Warning: package 'knitr' was built under R version 4.4.2
-
-``` r
 library(ggplot2)
 library(markdown)
 ```
-
-    ## Warning: package 'markdown' was built under R version 4.4.2
 
 # Question 1
 
@@ -33,43 +26,9 @@ Fusarium graminearum head blight. Plant Disease.
 ``` r
 # Load in Libraries
 library(tidyverse)
-```
-
-    ## Warning: package 'tidyverse' was built under R version 4.4.2
-
-    ## Warning: package 'tidyr' was built under R version 4.4.2
-
-    ## Warning: package 'readr' was built under R version 4.4.2
-
-    ## Warning: package 'purrr' was built under R version 4.4.2
-
-    ## Warning: package 'forcats' was built under R version 4.4.2
-
-    ## Warning: package 'lubridate' was built under R version 4.4.2
-
-    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-    ## ✔ lubridate 1.9.4     ✔ tibble    3.2.1
-    ## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
-    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-
-``` r
 library(ggpubr)
-```
-
-    ## Warning: package 'ggpubr' was built under R version 4.4.2
-
-``` r
 library(ggrepel)
-```
 
-    ## Warning: package 'ggrepel' was built under R version 4.4.2
-
-``` r
 # Make a color-blind friendly palette
 cbbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#000000")
 
@@ -94,12 +53,6 @@ myco.don.Q1 <- ggplot(myco, aes(x = Treatment, y = DON, color = Cultivar, fill =
 myco.don.Q1
 ```
 
-    ## Warning: Removed 8 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 8 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-1.png)<!-- -->
 
 ``` r
@@ -117,12 +70,6 @@ myco.don.Q3.1 <- ggplot(myco, aes(x = Treatment, y = X15ADON, color = Cultivar, 
 
 myco.don.Q3.1
 ```
-
-    ## Warning: Removed 10 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 10 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
 
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-2.png)<!-- -->
 
@@ -142,12 +89,6 @@ myco.don.Q3.2 <- ggplot(myco, aes(x = Treatment, y = MassperSeed_mg, color = Cul
 myco.don.Q3.2
 ```
 
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/Question%202-3.png)<!-- -->
 
 ### T-Tests
@@ -160,15 +101,6 @@ myco.don.Q1.Ttest <- myco.don.Q1 +
 myco.don.Q1.Ttest
 ```
 
-    ## Warning: Removed 8 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 8 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 8 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
@@ -178,15 +110,6 @@ myco.don.Q3.1.Ttest <- myco.don.Q3.1 +
 
 myco.don.Q3.1.Ttest
 ```
-
-    ## Warning: Removed 10 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 10 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 10 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
 
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
@@ -198,15 +121,6 @@ myco.don.Q3.2.Ttest <- myco.don.Q3.2 +
 
 myco.don.Q3.2.Ttest
 ```
-
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
 
 ![](Donohoo_Sam_Coding_Challege_4_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
@@ -222,36 +136,7 @@ myco.don.Ttest <- ggarrange(
   ncol = 3,  # Arrange the plots in 1 column
   legend = FALSE  # Do not include a legend in the combined figure
 )
-```
 
-    ## Warning: Removed 8 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 8 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 8 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
-    ## Warning: Removed 10 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 10 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 10 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_boxplot()`).
-
-    ## Warning: Removed 2 rows containing non-finite outside the scale range
-    ## (`stat_pwc()`).
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
-
-``` r
 myco.don.Ttest
 ```
 

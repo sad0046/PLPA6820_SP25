@@ -83,3 +83,14 @@ Content Cell  | Content Cell
 
 kable(head(mtcars, n = 5), digits = 3, format = "markdown")
 # When you click the Knit, it will render the document using the existing syntax.
+
+##### Organize a Repository + readme using Markdown #####
+
+# Add Clickable links to Analyses, Scripts etc.
+## Use Relative Paths or full http paths
+
+##### File Tree #####
+
+# Install the package fs
+## Use the command fs::dir_tree() to generate a list of files associated with the GitHub
+### Copy in the File Tree using R Markdown
