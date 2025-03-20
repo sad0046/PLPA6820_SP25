@@ -5,18 +5,14 @@ date: "2025-03-20"
 output:
   md_document:
     variant: gfm
-  word_document:
-    toc: true
   html_document:
     toc_float: true
+  word_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE)
-```
-
-```{r, include=TRUE}
-library(tidyverse)
 ```
 
 # Github Link

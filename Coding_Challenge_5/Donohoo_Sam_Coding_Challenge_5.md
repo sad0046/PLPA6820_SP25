@@ -1,7 +1,3 @@
-``` r
-library(tidyverse)
-```
-
 # Github Link
 
 Sam Donohoo - PLPA 6820 - <https://github.com/sad0046/PLPA6820_SP25>
