@@ -1,0 +1,100 @@
+---
+title: "PLPA 6820 Coding Challenge 5"
+author: "SA Donohoo"
+date: "2025-03-20"
+output:
+  md_document:
+    variant: gfm
+  word_document:
+    toc: true
+  html_document:
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE)
+```
+
+```{r, include=TRUE}
+library(tidyverse)
+```
+
+# Github Link
+Sam Donohoo - PLPA 6820 - https://github.com/sad0046/PLPA6820_SP25
+
+### Question 1 - Adding Data
+Download two .csv files from Canvas called DiversityData.csv and Metadata.csv, and read them into R using relative file paths.
+```{r Question 1, echo=TRUE}
+# Load in Libraries
+library(tidyverse)
+
+# Load in Metadata Data
+metaData <- read.csv("Metadata.csv", header = TRUE, na.strings = "na")
+
+# Load in Diversity Data
+divData <- read.csv("DiversityData.csv", header = TRUE, na.strings = "na")
+```
+
+### Question 2 - Combining Data
+Join the two dataframes together by the common column ‘Code’. Name the resulting dataframe *alpha*.
+```{r Question 2, echo=TRUE}
+# Join Dataframes Together
+# Name Combined Dataframe alpha
+alpha <- full_join(metaData, divData, by = "Code")
+
+head(alpha) # Print First 6 Rows
+```
+
+### Question 3 - Pielou's Evenness Index
+Calculate Pielou’s evenness index: Pielou’s evenness is an ecological parameter calculated by the Shannon diversity index (column Shannon) divided by the log of the richness column. 
+```{r Question 3, echo=TRUE}
+# Calculate Pielou's Evenness Index = Shannon / log(richness)
+alpha_even <- alpha %>%
+  mutate(logRich = log(richness)) %>% # creating a new column of the Log Richness
+  mutate(even = shannon/logRich) # creating a new column of Pielou's Evenness
+
+head(alpha_even) # Print First 6 Rows
+```
+
+### Question 4 - Summarise
+Using tidyverse language of functions and the pipe, use the summarise function and tell me the mean and standard error evenness grouped by crop over time.
+```{r Question 4, echo=TRUE}
+# Using summarise() Calculate Mean and Standard Error Grouped by Crop Over Time
+alpha_average <- alpha_even %>%
+  group_by(Crop, Time_Point) %>% # Grouping by Crop and Time Point
+  summarise(Mean.even = mean(even), # Calculating the Mean and Standard Error for Evenness
+            n = n(),
+            sd.dev = sd(even)) %>%
+  mutate(std.err = sd.dev/sqrt(n))
+
+alpha_average # Print Entire Table
+```
+### Question 5 - Differences
+Calculate the difference between the soybean column, the soil column, and the difference between the cotton column and the soil column.
+```{r Question 5, echo=TRUE}
+# Calculate Difference Between Soybean+Soil and Cotton+Soil
+alpha_average2 <- alpha_average %>%
+  select(Time_Point, Crop, Mean.even) %>% # Selecting Columns
+  pivot_wider(names_from = Crop, values_from = Mean.even) %>% # Pivot to Wide Format
+  mutate(diff.cotton.even = Soil - Cotton) %>% # calculates the mean per Treatment and Fungicide
+  mutate(diff.soybean.even = Soil - Soybean)
+
+alpha_average2 # Print Entire Table
+```
+
+### Question 6
+Connecting it to plots.
+```{r Question 6, echo=TRUE}
+# Plot Differences using ggplot2
+# Time_Point on the X, Value on the Y, Color Lines by Diff
+alpha_average2_plot <- alpha_average2 %>%
+  select(Time_Point, diff.cotton.even, diff.soybean.even) %>% # Selecting Columns
+  pivot_longer(c(diff.cotton.even, diff.soybean.even), names_to = "diff") %>% # Pivot to Long Format
+  ggplot(aes(x = Time_Point, y = value, color = diff)) + # Plot
+  geom_line() +
+  theme_classic() +
+  xlab("Time (hrs)") +
+  ylab("Difference from soil in Pielou's evenness")
+
+alpha_average2_plot # Print Plot
+```
