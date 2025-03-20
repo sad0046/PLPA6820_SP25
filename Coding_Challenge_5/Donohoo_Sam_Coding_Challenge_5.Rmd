@@ -3,12 +3,12 @@ title: "PLPA 6820 Coding Challenge 5"
 author: "SA Donohoo"
 date: "2025-03-20"
 output:
-  md_document:
-    variant: gfm
-  html_document:
-    toc_float: true
   word_document:
     toc: true
+  html_document:
+    toc_float: true
+  md_document:
+    variant: gfm
 ---
 
 ```{r setup, include=FALSE}
@@ -78,7 +78,7 @@ alpha_average2 <- alpha_average %>%
 alpha_average2 # Print Entire Table
 ```
 
-### Question 6
+### Question 6 - Plotting
 Connecting it to plots.
 ```{r Question 6, echo=TRUE}
 # Plot Differences using ggplot2

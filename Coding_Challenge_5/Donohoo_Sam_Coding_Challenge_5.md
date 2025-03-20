@@ -135,7 +135,7 @@ alpha_average2 # Print Entire Table
     ## 3         12  0.767 0.798   0.687          0.0313            0.112  
     ## 4         18  0.755 0.800   0.716          0.0449            0.0833
 
-### Question 6
+### Question 6 - Plotting
 
 Connecting it to plots.
 
