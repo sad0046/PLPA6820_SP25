@@ -11,7 +11,7 @@ functions and iterations?
 minimize copy and paste errors that occur when you manually type out or
 paste/edit chunks of code.
 
-### Question 2 - Explain For Loops
+### Question 2 - Explain Functions and For Loops
 
 In your own words, describe how to write a function and a for loop in R
 and how they work. Give me specifics like syntax, where to write code,
@@ -145,7 +145,7 @@ distance <- function(lat1,lon1,lat2,lon2) {
 }
 ```
 
-### Question 5 - A Single Distance
+### Question 5 - Compute a Single Distance
 
 Using your function, compute the distance between Auburn, AL and New
 York City
@@ -183,7 +183,7 @@ print(Cities.Distance.NewYork)
     ##   km_distance
     ## 1    1367.854
 
-### Question 6 - For Loop
+### Question 6 - For Loop to Compute Distances for All Cities
 
 Now, use your function within a for loop to calculate the distance
 between all other Cities in the data. Bonus point if you can have the

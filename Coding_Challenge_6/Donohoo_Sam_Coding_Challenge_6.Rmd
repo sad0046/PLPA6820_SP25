@@ -5,10 +5,10 @@ date: "2025-03-27"
 output:
   md_document:
     variant: gfm
-  word_document:
-    toc: true
   html_document:
     toc_float: true
+  word_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -23,7 +23,7 @@ Regarding reproducibility, what is the main point of writing your own functions 
 
 **Answer**: Functions and iterations simplify the code and help to minimize copy and paste errors that occur when you manually type out or paste/edit chunks of code.
 
-### Question 2 - Explain For Loops
+### Question 2 - Explain Functions and For Loops
 In your own words, describe how to write a function and a for loop in R and how they work. Give me specifics like syntax, where to write code, and how the results are returned.
 
 **Answer**: A function is composed of variables, code to be run using said variables, and usually a way to output the results of the function. An initial function can be written without variables in either the consule or an R Script. For Example:
@@ -115,7 +115,7 @@ distance <- function(lat1,lon1,lat2,lon2) {
 }
 ```
 
-### Question 5 - A Single Distance
+### Question 5 - Compute a Single Distance
 Using your function, compute the distance between Auburn, AL and New York City 
 
 - Subset/filter the Cities.csv data to include only the latitude and longitude values you need and input as input to your function. 
@@ -147,7 +147,7 @@ colnames(Cities.Distance.NewYork) <- "km_distance"
 print(Cities.Distance.NewYork)
 ```
 
-### Question 6 - For Loop
+### Question 6 - For Loop to Compute Distances for All Cities
 Now, use your function within a for loop to calculate the distance between all other Cities in the data. Bonus point if you can have the output of each iteration append a new row to a dataframe, generating a new column of data. In other words, the loop should create a dataframe with three columns called city1, city2, and distance_km, as shown below.
 
 ```{r Question 6, echo=TRUE}
