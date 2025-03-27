@@ -5,10 +5,10 @@ date: "2025-03-27"
 output:
   md_document:
     variant: gfm
-  html_document:
-    toc_float: true
   word_document:
     toc: true
+  html_document:
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -20,11 +20,44 @@ Sam Donohoo - PLPA 6820 - https://github.com/sad0046/PLPA6820_SP25
 
 ### Question 1 - Reproducibility
 Regarding reproducibility, what is the main point of writing your own functions and iterations?
-**Answer**: 
+
+**Answer**: Functions and iterations simplify the code and help to minimize copy and paste errors that occur when you manually type out or paste/edit chunks of code.
 
 ### Question 2 - Explain For Loops
 In your own words, describe how to write a function and a for loop in R and how they work. Give me specifics like syntax, where to write code, and how the results are returned.
-**Answer**
+
+**Answer**: A function is composed of variables, code to be run using said variables, and usually a way to output the results of the function. An initial function can be written without variables in either the consule or an R Script. For Example:
+```{r Question 2.1, echo=T}
+# Base Function without Assigning Values to Variables
+Sams.Function <- function(Variable1, Variable2) { # Inputs or Variables to Be Read. Uses {}.
+  Mathing <- Variable1 + Variable2 # Code to Be Run
+  return(Mathing) # Way to Output Results
+}
+```
+Now we can assign values to the two variables and run the function.These results are then printed in the consule or can appended to a dataframe.
+```{r Question 2.2, echo=T}
+# Base Function without Assigning Values to Variables
+Mathing <- Sams.Function(1:5,2)
+
+# Print Results
+print(Mathing)
+```
+
+**Answer**: A for loop is composed of a variable (organized in a list/array/sequence) and code to be run using said variable. Since for loops iteratively execute a block of code either a specific number of times or for each item in a list/array, an input variable can be defined before the for loop or during the for loop. Both the variable and for loop can be written in the consule or an R Script. The results of the for loop are then printed in the consule or can appended to a dataframe. For Example:
+```{r Question 2.3, echo=T}
+# Input Variable Organized as a Vector
+Input.Variable <- 1:5
+
+# For Loop Using Previously Assigned Variable
+for (i in Input.Variable) { # 
+  print(i + 5)
+}
+
+# For Loop Assigning Variable in Loop
+for (i in 1:5) { # 
+  print(i + 5)
+}
+```
 
 ### Question 3 - Adding Data
 Read in the Cities.csv file from Canvas using a relative file path.
@@ -44,7 +77,7 @@ All.Cities <- read.csv("../Raw_Data_for_Class_Exercises/Cities.csv", header = TR
 Write a function to calculate the distance between two pairs of coordinates based on the Haversine formula (see below). The input into the function should be lat1, lon1, lat2, and lon2. The function should return the object distance_km. All the code below needs to go into the function.
 
 #### Haversine formula
-```{r eval=F, echo=T}
+```{r eval=FALSE, echo=TRUE}
 # Convert to radians
 rad.lat1 <- lat1 * pi/180
 rad.lon1 <- lon1 * pi/180
@@ -90,7 +123,7 @@ Using your function, compute the distance between Auburn, AL and New York City
 - The output of your function should be 1367.854 km
 
 ```{r Question 5, echo=TRUE}
-# Subset and Preset New York
+# Subset and Preset New York Coordinates
 NewYork.lat <- All.Cities$lat[All.Cities$city == "New York"]
 NewYork.lon <- All.Cities$long[All.Cities$city == "New York"]
 
@@ -115,32 +148,30 @@ print(Cities.Distance.NewYork)
 ```
 
 ### Question 6 - For Loop
-Now, use your function within a for loop to calculate the distance between all other Cities.nm in the data. 
+Now, use your function within a for loop to calculate the distance between all other Cities in the data. Bonus point if you can have the output of each iteration append a new row to a dataframe, generating a new column of data. In other words, the loop should create a dataframe with three columns called city1, city2, and distance_km, as shown below.
 
-```{r Question 6, eval=FALSE}
+```{r Question 6, echo=TRUE}
 # Select All Cities That Are Not Auburn
-Citites <- All.Cities[All.Cities$city != "Auburn",]
+Cities <- All.Cities[All.Cities$city != "Auburn",]
 
-# Create a vector of City Names
-Citites.names <- unique(Citites$city)
+# Create a vector of City1 Names
+Cities.names <- unique(Cities$city)
+
+# Assign City2 Name
+Auburn.name <- "Auburn"
 
 # Generate Empty Dataframe
 Cities.Distance.All <- NULL # create a null object
 
 # Create for Loop that runs through all Cities and Calculates Distance to Auburn
-for (i in seq_along(Citites.names)) {
-  Cities.Distance.Single <- distance(Citites$lat[i],
-                                   Citites$long[i],
+for (i in seq_along(Cities.names)) {
+  Cities.Distance.Single <- distance(Cities$lat[i],
+                                   Cities$long[i],
                                    Auburn.lat,
-                                   Auburn.lon)
-  Cities.Distance.All <- rbind.data.frame(Cities.Distance.All, Cities.Distance.Single)
+                                   Auburn.lon) # Calculate Distance Between Two Cities
+  Temp.df <- data.frame(Cities$city[i],Auburn.name,Cities.Distance.Single) # Create a Row with City1, City2, and km_Distance
+  Cities.Distance.All <- rbind.data.frame(Cities.Distance.All, Temp.df) # Append to Previous Datframe
 }
-
-# Create a Dataframe with Similar Observation Length as All.Citites
-Citites.Two <- rep("Auburn",39)
-
-# Combine Three Dataframes
-Cities.Distance.All <- cbind(Citites.names,City.Two.Name,Cities.Distance.All)
 
 # Edit Column Names
 colnames(Cities.Distance.All) <- c("City1", "City2", "km_distance")
