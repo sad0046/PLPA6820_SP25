@@ -24,7 +24,7 @@ library(markdown)
 
 # Question 1
 
-**Explain a YAML Header:** A header that lists the title, author, date, and output formats for the markdown.
+***Explain a YAML Header:*** A header that lists the title, author, date, and output formats for the markdown.
 
 **Explain Literate Programming:** Coding organized into small sections to be more easily read.
 

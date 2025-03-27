@@ -1,0 +1,151 @@
+---
+title: "Coding Challenge #5 - For Loop"
+author: "SA Donohoo"
+date: "2025-03-27"
+output:
+  html_document:
+    toc_float: true
+  word_document:
+    toc: true
+  md_document:
+    variant: gfm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE)
+```
+
+# Github Link
+Sam Donohoo - PLPA 6820 - https://github.com/sad0046/PLPA6820_SP25
+
+### Question 1 - Reproducibility
+Regarding reproducibility, what is the main point of writing your own functions and iterations?
+**Answer**: 
+
+### Question 2 - Explain For Loops
+In your own words, describe how to write a function and a for loop in R and how they work. Give me specifics like syntax, where to write code, and how the results are returned.
+**Answer**
+
+### Question 3 - Adding Data
+Read in the Cities.csv file from Canvas using a relative file path.
+```{r Question 3, echo=TRUE}
+# Load in Packages
+library(ggplot2)
+library(drc) 
+library(tidyverse)
+library(dplyr)
+
+# Read in Data
+
+All.Cities <- read.csv("../Raw_Data_for_Class_Exercises/Cities.csv", header = TRUE, na.strings = "NA")
+```
+
+### Question 4 - Generate a For Loop
+Write a function to calculate the distance between two pairs of coordinates based on the Haversine formula (see below). The input into the function should be lat1, lon1, lat2, and lon2. The function should return the object distance_km. All the code below needs to go into the function.
+
+#### Haversine formula
+```{r eval=F, echo=T}
+# Convert to radians
+rad.lat1 <- lat1 * pi/180
+rad.lon1 <- lon1 * pi/180
+rad.lat2 <- lat2 * pi/180
+rad.lon2 <- lon2 * pi/180
+
+# Haversine formula
+delta_lat <- rad.lat2 - rad.lat1
+delta_lon <- rad.lon2 - rad.lon1
+a <- sin(delta_lat / 2)^2 + cos(rad.lat1) * cos(rad.lat2) * sin(delta_lon / 2)^2
+c <- 2 * asin(sqrt(a)) 
+
+# Earth's radius in kilometers
+earth_radius <- 6378137
+
+# Calculate the distance
+distance_km <- (earth_radius * c)/1000
+
+```
+
+#### Answer - Function
+```{r Question 4, echo=TRUE}
+distance <- function(lat1,lon1,lat2,lon2) {
+  rad.lat1 <- lat1 * pi/180
+  rad.lon1 <- lon1 * pi/180
+  rad.lat2 <- lat2 * pi/180
+  rad.lon2 <- lon2 * pi/180
+  delta_lat <- rad.lat2 - rad.lat1
+  delta_lon <- rad.lon2 - rad.lon1
+  a <- sin(delta_lat / 2)^2 + cos(rad.lat1) * cos(rad.lat2) * sin(delta_lon / 2)^2
+  c <- 2 * asin(sqrt(a))
+  earth_radius <- 6378137
+  distance_km <- (earth_radius * c)/1000
+
+}
+```
+
+### Question 5 - A Single Distance
+Using your function, compute the distance between Auburn, AL and New York City 
+
+- Subset/filter the Cities.csv data to include only the latitude and longitude values you need and input as input to your function. 
+
+- The output of your function should be 1367.854 km
+
+```{r Question 5, echo=TRUE}
+# Subset and Preset New York
+NewYork.lat <- All.Cities$lat[All.Cities$city == "New York"]
+NewYork.lon <- All.Cities$long[All.Cities$city == "New York"]
+
+# Subset and Preset Auburn Coordinates
+Auburn.lat <- All.Cities$lat[All.Cities$city == "Auburn"]
+Auburn.lon <- All.Cities$long[All.Cities$city == "Auburn"]
+
+# Generate Empty Dataframe
+Cities.Distance.NewYork <- NULL # create a null object
+
+# Run Function
+Distance.NewYork <- distance(NewYork.lat,NewYork.lon,Auburn.lat,Auburn.lon)
+
+# Combine Empty and Output Dataframe
+Cities.Distance.NewYork <- rbind.data.frame(Cities.Distance.NewYork, Distance.NewYork)
+
+# Edit Column Name
+colnames(Cities.Distance.NewYork) <- "km_distance"
+
+# Print Values
+print(Cities.Distance.NewYork)
+```
+
+### Question 6 - For Loop
+Now, use your function within a for loop to calculate the distance between all other Cities.nm in the data. 
+
+```{r Question 6, eval=FALSE}
+# Select All Cities That Are Not Auburn
+Citites <- All.Cities[All.Cities$city != "Auburn",]
+
+# Create a vector of City Names
+Citites.names <- unique(Citites$city)
+
+# Generate Empty Dataframe
+Cities.Distance.All <- NULL # create a null object
+
+# Create for Loop that runs through all Cities and Calculates Distance to Auburn
+for (i in seq_along(Citites.names)) {
+  Cities.Distance.Single <- distance(Citites$lat[i],
+                                   Citites$long[i],
+                                   Auburn.lat,
+                                   Auburn.lon)
+  Cities.Distance.All <- rbind.data.frame(Cities.Distance.All, Cities.Distance.Single)
+}
+
+# Create a Dataframe with Similar Observation Length as All.Citites
+Citites.Two <- rep("Auburn",39)
+
+# Combine Three Dataframes
+Cities.Distance.All <- cbind(Citites.names,City.Two.Name,Cities.Distance.All)
+
+# Edit Column Names
+colnames(Cities.Distance.All) <- c("City1", "City2", "km_distance")
+
+# Print Values
+print(Cities.Distance.All)
+```
+
