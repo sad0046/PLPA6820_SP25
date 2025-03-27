@@ -1,34 +1,23 @@
----
-title: "Coding Challenge #5 - For Loop"
-author: "SA Donohoo"
-date: "2025-03-27"
-output:
-  md_document:
-    variant: gfm
-  html_document:
-    toc_float: true
-  word_document:
-    toc: true
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE)
-```
-
 # Github Link
-Sam Donohoo - PLPA 6820 - https://github.com/sad0046/PLPA6820_SP25
+
+Sam Donohoo - PLPA 6820 - <https://github.com/sad0046/PLPA6820_SP25>
 
 ### Question 1 - Reproducibility
-Regarding reproducibility, what is the main point of writing your own functions and iterations?
-**Answer**: 
+
+Regarding reproducibility, what is the main point of writing your own
+functions and iterations? **Answer**:
 
 ### Question 2 - Explain For Loops
-In your own words, describe how to write a function and a for loop in R and how they work. Give me specifics like syntax, where to write code, and how the results are returned.
-**Answer**
+
+In your own words, describe how to write a function and a for loop in R
+and how they work. Give me specifics like syntax, where to write code,
+and how the results are returned. **Answer**
 
 ### Question 3 - Adding Data
+
 Read in the Cities.csv file from Canvas using a relative file path.
-```{r Question 3, echo=TRUE}
+
+``` r
 # Load in Packages
 library(ggplot2)
 library(drc) 
@@ -41,10 +30,16 @@ All.Cities <- read.csv("../Raw_Data_for_Class_Exercises/Cities.csv", header = TR
 ```
 
 ### Question 4 - Generate a For Loop
-Write a function to calculate the distance between two pairs of coordinates based on the Haversine formula (see below). The input into the function should be lat1, lon1, lat2, and lon2. The function should return the object distance_km. All the code below needs to go into the function.
+
+Write a function to calculate the distance between two pairs of
+coordinates based on the Haversine formula (see below). The input into
+the function should be lat1, lon1, lat2, and lon2. The function should
+return the object distance_km. All the code below needs to go into the
+function.
 
 #### Haversine formula
-```{r eval=F, echo=T}
+
+``` r
 # Convert to radians
 rad.lat1 <- lat1 * pi/180
 rad.lon1 <- lon1 * pi/180
@@ -62,11 +57,11 @@ earth_radius <- 6378137
 
 # Calculate the distance
 distance_km <- (earth_radius * c)/1000
-
 ```
 
 #### Answer - Function
-```{r Question 4, echo=TRUE}
+
+``` r
 distance <- function(lat1,lon1,lat2,lon2) {
   rad.lat1 <- lat1 * pi/180
   rad.lon1 <- lon1 * pi/180
@@ -83,13 +78,16 @@ distance <- function(lat1,lon1,lat2,lon2) {
 ```
 
 ### Question 5 - A Single Distance
-Using your function, compute the distance between Auburn, AL and New York City 
 
-- Subset/filter the Cities.csv data to include only the latitude and longitude values you need and input as input to your function. 
+Using your function, compute the distance between Auburn, AL and New
+York City
+
+- Subset/filter the Cities.csv data to include only the latitude and
+  longitude values you need and input as input to your function.
 
 - The output of your function should be 1367.854 km
 
-```{r Question 5, echo=TRUE}
+``` r
 # Subset and Preset New York
 NewYork.lat <- All.Cities$lat[All.Cities$city == "New York"]
 NewYork.lon <- All.Cities$long[All.Cities$city == "New York"]
@@ -114,10 +112,15 @@ colnames(Cities.Distance.NewYork) <- "km_distance"
 print(Cities.Distance.NewYork)
 ```
 
-### Question 6 - For Loop
-Now, use your function within a for loop to calculate the distance between all other Cities.nm in the data. 
+    ##   km_distance
+    ## 1    1367.854
 
-```{r Question 6, eval=FALSE}
+### Question 6 - For Loop
+
+Now, use your function within a for loop to calculate the distance
+between all other Cities.nm in the data.
+
+``` r
 # Select All Cities That Are Not Auburn
 Citites <- All.Cities[All.Cities$city != "Auburn",]
 
@@ -148,4 +151,3 @@ colnames(Cities.Distance.All) <- c("City1", "City2", "km_distance")
 # Print Values
 print(Cities.Distance.All)
 ```
-
