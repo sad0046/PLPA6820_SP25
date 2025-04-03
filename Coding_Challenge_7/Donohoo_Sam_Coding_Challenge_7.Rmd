@@ -1,0 +1,129 @@
+---
+title: "Coding Challenge #7 - Linear Models"
+author: "SA Donohoo"
+date: "2025-04-03"
+output:
+  md_document:
+    variant: gfm
+  word_document:
+    toc: true
+  html_document:
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE, message = FALSE)
+```
+
+### Question 1 - Read Data
+Read in the data called “PlantEmergence.csv” using a relative file path and load the following libraries: tidyverse, lme4, emmeans, multcomp, and multcompView. Turn the Treatment, DaysAfterPlanting, and Rep into factors using the function as.factor
+```{r Question 1, echo=TRUE}
+# Load Packages
+library(tidyverse)
+library(lme4)
+library(emmeans)
+library(multcomp)
+library(multcompView)
+
+# Read Data Using Relative File Path
+Plant.Emer <- read.csv("PlantEmergence.csv")
+
+# Convert Treatment, DaysAfterPlanting, and Rep columns into Factors
+Plant.Emer$Treatment <- as.factor(Plant.Emer$Treatment)
+Plant.Emer$DaysAfterPlanting <- as.factor(Plant.Emer$DaysAfterPlanting)
+Plant.Emer$Rep <- as.factor(Plant.Emer$Rep)
+```
+
+### Question 2 - Fit a Linear Model
+Fit a linear model to predict Emergence using Treatment and DaysAfterPlanting along with the interaction. Provide the summary of the linear model and ANOVA results. 
+```{r Question 2, echo=TRUE}
+# Predict Emergence using Treatment and DaysAfterPlanting with an Interaction
+Emer.lm.inter <- lm(Emergence ~ Treatment + DaysAfterPlanting + Treatment:DaysAfterPlanting, data = Plant.Emer)
+
+# Check for Significant Interaction Terms
+summary(Emer.lm.inter)
+
+# Run ANOVA
+anova(Emer.lm.inter)
+```
+
+### Question 3 - Interaction vs Simplify Linear Model
+Based on the results of the linear model in question 2, do you need to fit the interaction term? Provide a simplified linear model without the interaction term but still testing both main effects. Provide the summary and ANOVA results. Then, interpret the intercept and the coefficient for Treatment 2.
+```{r Question 3, echo=TRUE}
+# Predict Emergence using Treatment and DaysAfterPlanting with NO INTERACTION
+Emer.lm.simple <- lm(Emergence ~ Treatment + DaysAfterPlanting, data = Plant.Emer)
+
+# Check for Significant Terms
+summary(Emer.lm.simple)
+
+# Run ANOVA
+anova(Emer.lm.simple)
+```
+
+**Answer:** There is NO significant interaction term between Treatment and DaysAfterPlanting. Therefore, the simple linear model is best. In the null hypothesis (i.e. control, no treatment) the predicated value of emergence (intercept) is 182.163. The slope of Treatment 2 is -134.531, which means that Treatment 2 significantly impacted the plant's emergence, since it had a lower mean value (~50).
+
+### Question 4 - Tukey Post Hoc on Treatment
+Calculate the least square means for Treatment using the emmeans package and perform a Tukey separation with the compact letter display using the cld function. Interpret the results.
+```{r Question 4, echo=TRUE}
+# Run Tukey Post-Hoc Test on Treatment
+Emer.lm.Tukey <- emmeans(Emer.lm.simple, ~ Treatment) 
+Results_Tukey <- cld(Emer.lm.Tukey, alpha = 0.05, reversed = TRUE, details = TRUE)
+
+# View Tukey Results
+Results_Tukey
+```
+
+**Answer:** Treatments sharing the same group are not significantly different from one another. For example: Treatments 1, 3, 5, 6, 8, and 9 share a group (i.e. group 1); however, Treatments 1, 4, 7, 8, and 9 share a group (i.e. group 2) and are slightly lower than Treatments 3, 5, and 6. Since Treatment 2 had significantly lower rates of emergence than the other eight treatments it is the solitary treatment in group 3.
+
+### Question 5 - Visualizing the Linear Model + Tukey Post Hoc Test
+The provided function lets you dynamically add a linear model plus one factor from that model and plots a bar chart with letters denoting treatment differences. Use this model to generate the plot shown below. Explain the significance of the letters. 
+```{r Question 5, echo=TRUE}
+# Function to add a linear model plus one factor from that model.
+# Also plots a bar chart with letters denoting treatment differences.
+plot_cldbars_onefactor <- function(lm_model, factor) {
+  data <- lm_model$model
+  variables <- colnames(lm_model$model)
+  dependent_var <- variables[1]
+  independent_var <- variables[2:length(variables)]
+
+  lsmeans <- emmeans(lm_model, as.formula(paste("~", factor))) # estimate lsmeans 
+  Results_lsmeans <- cld(lsmeans, alpha = 0.05, reversed = TRUE, details = TRUE, Letters = letters) # contrast with Tukey adjustment by default.
+  
+  # Extracting the letters for the bars
+  sig.diff.letters <- data.frame(Results_lsmeans$emmeans[,1], 
+                                 str_trim(Results_lsmeans$emmeans[,7]))
+  colnames(sig.diff.letters) <- c(factor, "Letters")
+  
+  # for plotting with letters from significance test
+  ave_stand2 <- lm_model$model %>%
+    group_by(!!sym(factor)) %>%
+    dplyr::summarize(
+      ave.emerge = mean(.data[[dependent_var]], na.rm = TRUE),
+      se = sd(.data[[dependent_var]]) / sqrt(n())
+    ) %>%
+    left_join(sig.diff.letters, by = factor) %>%
+    mutate(letter_position = ave.emerge + 10 * se)
+  
+  plot <- ggplot(data, aes(x = !! sym(factor), y = !! sym(dependent_var))) + 
+    stat_summary(fun = mean, geom = "bar") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5) +
+    ylab("Number of emerged plants") + 
+    geom_jitter(width = 0.02, alpha = 0.5) +
+    geom_text(data = ave_stand2, aes(label = Letters, y = letter_position), size = 5) +
+    xlab(as.character(factor)) +
+    theme_classic()
+  
+  return(plot)
+}
+
+
+# Plot Treatment + Tukey Post Hoc Tests using the above Function
+plot_cldbars_onefactor(Emer.lm.simple, "Treatment")
+```
+
+**Answer:** The letters represent the same groups suggested in the Tukey Post-Hoc Test. Treatments sharing the same letter are not significantly different from one another. Treatment 2 is the only Treatment with the letter c, since it has significantly lower rates of emergence than the other eight treatments.
+
+### Question 6 - GitHub Link
+Generate the gfm .md file along with a .html, .docx, or .pdf. Commit, and push the .md file to github and turn in the .html, .docx, or .pdf to Canvas. Provide me a link here to your github.
+
+Github Link Sam Donohoo - PLPA 6820 - https://github.com/sad0046/PLPA6820_SP25
