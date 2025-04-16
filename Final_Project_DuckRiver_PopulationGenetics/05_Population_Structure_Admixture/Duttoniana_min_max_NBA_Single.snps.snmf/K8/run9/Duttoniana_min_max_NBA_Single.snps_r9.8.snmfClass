@@ -1,0 +1,6 @@
+new("snmfClass", directory = "K8/run9/", snmfClass.file = "Duttoniana_min_max_NBA_Single.snps_r9.8.snmfClass", 
+    K = 8L, run = 9L, CPU = 1L, seed = 110266210L, alpha = 100, 
+    percentage = 0.05, I = 0L, iterations = 200L, entropy = TRUE, 
+    tolerance = 1e-10, crossEntropy = 0.60295283090293, ploidy = 2L, 
+    Q.input.file = "", Q.output.file = "Duttoniana_min_max_NBA_Single.snps_r9.8.Q", 
+    G.output.file = "Duttoniana_min_max_NBA_Single.snps_r9.8.G")
