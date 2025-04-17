@@ -4,15 +4,17 @@ library(poppr)
 library(na.tools)
 library(paletteer)
 
-Lithasia.Lithasia.data <- read.genepop(file="Final_Project_DuckRiver_PopulationGenetics/04_Population_Structure_DAPC/Lithasia_Three_Species_Multi.snps.gen")
+setwd("~/PLPA_6820_SP2025/Final_Project_DuckRiver_PopulationGenetics/04_Population_Structure_DAPC")
 
-Lithasia.data$pop
-grp <- find.clusters(Lithasia.data, max.n.clust=30)
+Lithasia.Lithasia.data <- read.genepop(file="Lithasia_R80_Min_Max_NBA_NoOut.populations.snps.gen")
+
+Lithasia.Lithasia.data$pop
+grp <- find.clusters(Lithasia.Lithasia.data, max.n.clust=30)
 
 #500,8
 
 
-dapc2 <- dapc(Lithasia.data,grp$grp)
+dapc2 <- dapc(Lithasia.Lithasia.data,grp$grp)
 #7,7
 
 pdf("Elim_5pops2_DAPC.pdf")
@@ -21,7 +23,7 @@ cbbPalette <- c("#E69F00", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"
 
 Ohiosubset <- read.csv("OhioRiver_Wabash_Names_TrueOld.csv")
 
-Ohio <- Lithasia.data[i=c(Ohiosubset$Name)]
+Ohio <- Lithasia.Lithasia.data[i=c(Ohiosubset$Name)]
 
 grp3 <- find.clusters(Ohio, max.n.clust = 30)
 
@@ -29,7 +31,7 @@ dap4 <- dapc(Ohio,grp3$grp)
 
 gent <- read.csv("gentNames.csv")
 
-gentsubset <- Lithasia.data[i=c(gent$Names)]
+gentsubset <- Lithasia.Lithasia.data[i=c(gent$Names)]
 
 grp4 <- find.clusters(gentsubset, max.n.clust = 10)
 
@@ -96,7 +98,7 @@ assignplot(dapc2)
 
 assignplot(dapc2, subset = 201:250)
 
-write.csv(grp[["grp"]], "DuckRiver_DAPC_k8.csv")
+write.csv(grp[["grp"]], "DuckRiver_DAPC_k8.2.csv")
 
 dev.off()
 
